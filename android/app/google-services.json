@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "366699623911",
+    "project_id": "heynoteapp-ce76e",
+    "storage_bucket": "heynoteapp-ce76e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366699623911:android:2b3366ff3ca3b96dd6b942",
+        "android_client_info": {
+          "package_name": "com.example.heynoteapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6upC59tX4OV2fDRDY2vlCKzGeXDP4VbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
