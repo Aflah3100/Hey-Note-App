@@ -61,7 +61,9 @@ class ScreenNoteEdit extends StatelessWidget {
                 }
               },
               icon: const Icon(Icons.save),
-              label: const Text('Save'))
+              label: const Text('Save',style: TextStyle(
+                fontWeight: FontWeight.bold
+              ),))
         ],
       ),
       body: SafeArea(

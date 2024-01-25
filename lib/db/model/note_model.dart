@@ -4,10 +4,10 @@ class NoteModel {
   String title;
   String content;
 
-  NoteModel({required this.id,required this.title, required this.content});
+  NoteModel({required this.id, required this.title, required this.content});
 
   //function
   Map<String, dynamic> toJson() {
-    return {'id':id,'title': title, 'content': content};
+    return {'id': id, 'title': title, 'content': content};
   }
 }
