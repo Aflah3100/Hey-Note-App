@@ -1,16 +1,50 @@
-# heynoteapp
+# Hey Note App
 
-A new Flutter project.
+This is Notes application developed using Flutter and Google FireBase. The notes are stored in Firebase Firestore, providing a seamless and persistent note-taking experience.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Create, read, update, and delete notes.
+- Store notes securely in Firebase Firestore.
+- Simple and intuitive user interface.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter: Dart framework for building the mobile app.
+- Firebase Firestore: Cloud-based NoSQL database for storing notes.
+## Backend Setup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/aflah3100/heynote-flutter-app.git
+   
+2. Navigate to the project directory:
+
+   ```bash
+   cd heynote-flutter-app
+   
+3. Install dependencies:
+
+   ```bash
+   flutter pub get
+   
+4.Configure Firebase:
+
+- Create a new Firebase project on the Firebase Console.
+- Add your Android and iOS apps to the project and download the configuration files.
+- Place the configuration files in the respective directories (android/app and ios).
+- Enable Firebase Authentication and Firestore for your project.
+
+5. Run the app
+   ```bash
+   flutter run
+
+## Contributing
+Contributions are welcome! Feel free to open issues and pull requests.
+   
+   
+
+  
