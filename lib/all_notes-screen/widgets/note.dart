@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heynoteapp/db/firebase/functions..dart';
 import 'package:heynoteapp/update_or_delete_screen/add_or_update_screen.dart';
 
 class Note extends StatelessWidget {
@@ -47,7 +48,9 @@ class Note extends StatelessWidget {
                       fontSize: 20.0, fontWeight: FontWeight.bold),
                 )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      FireStoreDb.instance.deleteNote(id);
+                    },
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,

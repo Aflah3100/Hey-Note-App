@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:heynoteapp/all_notes-screen/widgets/note.dart';
+import 'package:heynoteapp/db/firebase/functions..dart';
 import 'package:heynoteapp/update_or_delete_screen/add_or_update_screen.dart';
 
 class ScreenDisplayNotes extends StatelessWidget {
@@ -13,22 +15,37 @@ class ScreenDisplayNotes extends StatelessWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-          padding: const EdgeInsets.all(20.0),
-          children: List.generate(
-            10,
-            (index) => Note(
-              id: index.toString(),
-              title: 'Lorem Ipsum',
-              content:
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-            ),
-          ),
-        ),
-      ),
+          child: StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection(FireStoreDb.collectionName)
+                  .snapshots(),
+              builder: (context, noteSnapshots) {
+                if (noteSnapshots.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                if (noteSnapshots.hasData) {
+                  final noteLists=noteSnapshots.data!.docs ;
+                  if(noteLists.isEmpty){
+                     return const Center(child: Text('Hey Notes!'),);
+                  }
+                  return GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 10.0,
+                    padding: const EdgeInsets.all(20.0),
+                    children: List.generate(
+                      noteLists.length,
+                      (index) {
+                        final currentNote=noteLists[index];
+                        return Note(id: currentNote.id, title: currentNote['title'], content: currentNote['content']);
+                      }
+                    ),
+                  );
+                }else{
+                  return const Center(child: Text('Hey Notes!'),);
+                }
+                
+              })),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).pushNamed(ScreenNoteEdit.addRouteName);

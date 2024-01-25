@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Note-App',
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: ThemeManager().lightTheme,
       darkTheme: ThemeManager().darkTheme,
       home: const ScreenDisplayNotes(),

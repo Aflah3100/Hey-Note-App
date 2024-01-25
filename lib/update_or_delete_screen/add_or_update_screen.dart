@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:heynoteapp/db/firebase/functions..dart';
+import 'package:heynoteapp/db/model/note_model.dart';
 
 // Action type
 enum ActionType { addNote, editNote }
@@ -11,6 +13,7 @@ class ScreenNoteEdit extends StatelessWidget {
 
   // Action
   final ActionType screenMode;
+
   String? id;
   ScreenNoteEdit(
       {super.key,
@@ -49,11 +52,11 @@ class ScreenNoteEdit extends StatelessWidget {
               onPressed: () {
                 switch (screenMode) {
                   case ActionType.addNote:
-                    //add note
+                    addNote(context);
                     break;
 
                   case ActionType.editNote:
-                    //edit and save
+                    updateNote(context);
                     break;
                 }
               },
@@ -90,7 +93,7 @@ class ScreenNoteEdit extends StatelessWidget {
                   child: TextFormField(
                     controller: contentController,
                     validator: (content) => (content == null || content.isEmpty)
-                        ? 'Title is Empty'
+                        ? 'Empty Note Content'
                         : null,
                     maxLines: 200,
                     decoration: InputDecoration(
@@ -109,5 +112,33 @@ class ScreenNoteEdit extends StatelessWidget {
     );
   }
 
-  //Save Function
+  //add note function
+
+  Future<void> addNote(BuildContext context) async {
+    if (formKey1.currentState != null &&
+        formKey1.currentState!.validate() &&
+        formKey2.currentState != null &&
+        formKey2.currentState!.validate()) {
+      NoteModel note = NoteModel(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          title: titleController.text,
+          content: contentController.text);
+      //add to firebase
+      FireStoreDb.instance.addNote(note, context);
+    }
+  }
+
+  //update note function
+
+  Future<void> updateNote(BuildContext context) async {
+    if (formKey1.currentState!.validate() &&
+        formKey2.currentState!.validate()) {
+      NoteModel updatedNote = NoteModel(
+          id: id!,
+          title: titleController.text,
+          content: contentController.text);
+      // update in firebase
+      FireStoreDb.instance.updateNote(updatedNote, context);
+    }
+  }
 }
